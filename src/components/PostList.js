@@ -20,18 +20,21 @@ import React, { Component } from 'react'
         })
         .catch(error=>{
             console.log(error);
+            this.setState({errorMsg:'Error retrieving data'})
         })
     }
+
     
-      
     render() {
-        const {posts}=this.state
+        const {posts,errorMsg}=this.state
         return (
             <div>
                 List of Posts{
-                this.state.posts.length?
-                posts.map(
+                this.state.posts.length?posts.map(
                     post=><div key={post.id} >{post.title}</div>):null
+                }
+                {
+                    errorMsg?<div>{errorMsg}</div>:null
                 }
             </div>
         )
@@ -49,3 +52,6 @@ export default PostList
 //when we change state,component will re-render
 //this time array is not empty ande hence the list of titles are
 //rendered in the browser
+//-----------------------
+//-------------------------
+//how to display error message when the api fails
